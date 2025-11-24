@@ -1,4 +1,4 @@
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/components/product/product-card";
 import { PRODUCTS } from "@/lib/data";
 
 export default function Home() {

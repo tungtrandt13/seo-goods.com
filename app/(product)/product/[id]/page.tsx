@@ -480,6 +480,37 @@ export default function ProductDetailPage() {
                         </button>
                     </div>
                 </div>
+
+                {/* Footer with Policies */}
+                <footer className="bg-gray-50 border-t border-gray-200 py-6 px-4 mb-20">
+                    <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-3 text-sm">
+                            <Link href="/chinh-sach/bao-mat" className="text-gray-600 hover:text-red-600 transition-colors">
+                                Chính sách bảo mật
+                            </Link>
+                            <Link href="/chinh-sach/doi-tra" className="text-gray-600 hover:text-red-600 transition-colors">
+                                Chính sách đổi trả
+                            </Link>
+                            <Link href="/chinh-sach/van-chuyen" className="text-gray-600 hover:text-red-600 transition-colors">
+                                Chính sách vận chuyển
+                            </Link>
+                            <Link href="/chinh-sach/thanh-toan" className="text-gray-600 hover:text-red-600 transition-colors">
+                                Hình thức thanh toán
+                            </Link>
+                            <Link href="/dieu-khoan/su-dung" className="text-gray-600 hover:text-red-600 transition-colors">
+                                Điều khoản sử dụng
+                            </Link>
+                            <Link href="/lien-he" className="text-gray-600 hover:text-red-600 transition-colors">
+                                Liên hệ
+                            </Link>
+                        </div>
+                        <div className="border-t border-gray-200 pt-4 text-center">
+                            <p className="text-xs text-gray-500">
+                                © 2024 SEO Goods. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     );

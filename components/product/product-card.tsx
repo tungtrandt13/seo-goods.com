@@ -4,6 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingCart } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
+import { useFormatCurrency } from '@/hooks/use-format-currency';
+import { calculateDiscount } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
 
 interface ProductCardProps {
     id: string | number;
@@ -17,7 +20,8 @@ interface ProductCardProps {
 
 export function ProductCard({ id, name, price, originalPrice, image, isHot, isSale }: ProductCardProps) {
     const { addToCart } = useCart();
-    const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
+    const formatCurrency = useFormatCurrency();
+    const discount = originalPrice ? calculateDiscount(originalPrice, price) : 0;
 
     const handleAddToCart = () => {
         addToCart({ id, name, price, image });
@@ -28,21 +32,12 @@ export function ProductCard({ id, name, price, originalPrice, image, isHot, isSa
         <div className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-lg">
             {/* Badges */}
             <div className="absolute left-2 top-2 z-10 flex flex-col gap-1">
-                {isHot && (
-                    <span className="rounded bg-red-500 px-2 py-0.5 text-xs font-bold text-white">
-                        HOT
-                    </span>
-                )}
-                {isSale && discount > 0 && (
-                    <span className="rounded bg-orange-500 px-2 py-0.5 text-xs font-bold text-white">
-                        -{discount}%
-                    </span>
-                )}
+                {isHot && <Badge variant="hot">HOT</Badge>}
+                {isSale && discount > 0 && <Badge variant="discount">-{discount}%</Badge>}
             </div>
 
             {/* Image */}
             <Link href={`/product/${id}`} className="relative aspect-square w-full overflow-hidden bg-gray-100">
-                {/* Note: Using a placeholder if image fails, but for now assuming valid URLs or local images */}
                 <Image
                     src={image}
                     alt={name}
@@ -63,11 +58,11 @@ export function ProductCard({ id, name, price, originalPrice, image, isHot, isSa
                 <div className="mt-auto flex items-end justify-between">
                     <div className="flex flex-col">
                         <span className="text-lg font-bold text-red-600">
-                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
+                            {formatCurrency(price)}
                         </span>
                         {originalPrice && originalPrice > price && (
                             <span className="text-xs text-gray-400 line-through">
-                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(originalPrice)}
+                                {formatCurrency(originalPrice)}
                             </span>
                         )}
                     </div>

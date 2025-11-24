@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FOOTER_LINKS, SITE_INFO } from '@/lib/constants';
 
 export function Footer() {
     return (
@@ -9,19 +10,22 @@ export function Footer() {
                     <div>
                         <h3 className="mb-4 text-lg font-bold text-gray-900">Về chúng tôi</h3>
                         <p className="mb-4">
-                            SEO Goods chuyên cung cấp các sản phẩm công nghệ, gia dụng chất lượng cao với giá tốt nhất thị trường.
+                            {SITE_INFO.DESCRIPTION}
                         </p>
-                        <p>Email: support@seogoods.com</p>
+                        <p>Email: {SITE_INFO.EMAIL}</p>
                     </div>
 
                     {/* Column 2: Policies */}
                     <div>
                         <h3 className="mb-4 text-lg font-bold text-gray-900">Chính sách</h3>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="hover:text-blue-600">Chính sách bảo mật</Link></li>
-                            <li><Link href="#" className="hover:text-blue-600">Điều khoản dịch vụ</Link></li>
-                            <li><Link href="#" className="hover:text-blue-600">Chính sách đổi trả</Link></li>
-                            <li><Link href="#" className="hover:text-blue-600">Vận chuyển & Giao hàng</Link></li>
+                            {FOOTER_LINKS.POLICIES.map((link) => (
+                                <li key={link.href}>
+                                    <Link href={link.href} className="hover:text-blue-600">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
@@ -29,9 +33,13 @@ export function Footer() {
                     <div>
                         <h3 className="mb-4 text-lg font-bold text-gray-900">Hỗ trợ khách hàng</h3>
                         <ul className="space-y-2">
-                            <li><Link href="#" className="hover:text-blue-600">Trung tâm trợ giúp</Link></li>
-                            <li><Link href="#" className="hover:text-blue-600">Hướng dẫn mua hàng</Link></li>
-                            <li><Link href="#" className="hover:text-blue-600">Kiểm tra đơn hàng</Link></li>
+                            {FOOTER_LINKS.SUPPORT.map((link) => (
+                                <li key={link.href}>
+                                    <Link href={link.href} className="hover:text-blue-600">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
@@ -53,7 +61,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-12 border-t border-gray-200 pt-8 text-center">
-                    <p>&copy; {new Date().getFullYear()} SEO Goods. All rights reserved.</p>
+                    <p>&copy; {SITE_INFO.COPYRIGHT_YEAR} {SITE_INFO.NAME}. All rights reserved.</p>
                 </div>
             </div>
         </footer>
